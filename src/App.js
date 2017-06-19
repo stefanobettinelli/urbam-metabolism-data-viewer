@@ -16,20 +16,34 @@ class App extends Component {
         this.state = {
             isLoading: false,
             boxNameSearched: '',
+            dateFrom: '',
+            hFrom: '',
+            dateTo: '',
+            hTo: '',
         };
 
         this.onSearchChanged = this.onSearchChanged.bind(this);
     }
 
-    onSearchChanged(newSearchTerm) {
-        this.setState({boxNameSearched: newSearchTerm});
+    onSearchChanged(newSearchParams) {
+        this.setState({
+            boxNameSearched: newSearchParams.searchText,
+            dateFrom: newSearchParams.dateFrom,
+            hFrom: newSearchParams.hFrom,
+            dateTo: newSearchParams.dateTo,
+            hTo: newSearchParams.hTo,
+        });
     }
 
     render() {
+        const { boxNameSearched, dateFrom, hFrom, dateTo, hTo} = this.state;
+        //const URL = `http://10.105.0.1:8080/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxNameSearched}&datafrom=${dateFrom}&h_from=${hFrom}&datato=${dateTo}&h_to=${hTo}`;
+        //const URL = `http://10.105.0.1:8080/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxNameSearched.toUpperCase()}&datafrom=${dateFrom}&datato=${dateTo}`;
+        const URL = `http://localhost:8080/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxNameSearched.toUpperCase()}&datafrom=${dateFrom}&datato=${dateTo}`;
         return (
             <div>
-                <SearchComponent callBackParent={(newSearchTerm) => this.onSearchChanged(newSearchTerm)}/>
-                <BoxTableData boxName={this.state.boxNameSearched}/>
+                <SearchComponent callBackParent={(newSearchParams) => this.onSearchChanged(newSearchParams)}/>
+                <BoxTableData url={URL} boxName={this.state.boxNameSearched}/>
             </div>
         );
     }
@@ -40,11 +54,17 @@ class SearchComponent extends Component {
         super(props);
 
         this.state = {
-            searchText: ''
+            searchText: '',
+            dateFrom: '',
+            hFrom: '',
+            dateTo: '',
+            hTo: '',
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleDateFromChange = this.handleDateFromChange.bind(this);
+        this.handleDateToChange = this.handleDateToChange.bind(this);
     }
 
     handleChange(e) {
@@ -54,13 +74,28 @@ class SearchComponent extends Component {
     handleClick() {
         this.setState({isLoading: true});
 
-        this.props.callBackParent(this.state.searchText);
+        this.props.callBackParent(this.state);
 
         setTimeout(() => {
             // Completed of async action, set loading state back
             this.setState({isLoading: false});
         }, 1000);
+    }
 
+    handleDateFromChange(e) {
+        const momentObject = e.format('YYYY-MM-DD,h:mm:ss').split(',');
+        this.setState({
+            dateFrom: momentObject[0],
+            hFrom: momentObject[1],
+        });
+    }
+
+    handleDateToChange(e) {
+        const momentObject = e.format('YYYY-MM-DD,h:mm:ss').split(',');
+        this.setState({
+            dateTo: momentObject[0],
+            hTo: momentObject[1],
+        });
     }
 
     render() {
@@ -77,9 +112,9 @@ class SearchComponent extends Component {
                             onChange={this.handleChange}
                         />
                         <ControlLabel>Date From</ControlLabel>
-                        <DateTime/>
+                        <DateTime input={false} onChange={this.handleDateFromChange}/>
                         <ControlLabel>Date To</ControlLabel>
-                        <DateTime/>
+                        <DateTime input={false} onChange={this.handleDateToChange}/>
                         <Button bsStyle="primary"
                                 onClick={!this.state.isLoading ? this.handleClick : null}
                                 disabled={this.state.isLoading}
@@ -97,6 +132,7 @@ class BoxTableData extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            url: '',
             boxNameSearched: 'SSB_002',
             obsList: [],
         };
@@ -124,17 +160,17 @@ class BoxTableData extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.boxName && this.state.boxNameSearched.toUpperCase() !== nextProps.boxName.toUpperCase()) {
-            this.setState({boxNameSearched: nextProps.boxName.toUpperCase()});
-        }
+        // console.log("nextPros ", nextProps);
+        // if (nextProps.boxName && this.state.boxNameSearched.toUpperCase() !== nextProps.boxName.toUpperCase()) {
+        //     this.setState({boxNameSearched: nextProps.boxName.toUpperCase()});
+        // }
+        this.setState({ url: nextProps.url });
     }
 
 
     fetchSearchBoxObservations() {
-        console.log("new data fetch");
-        //const URL = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`;
-        const URL = `http://10.105.0.1:8080/get_all_obs_from_date_to_date_for_obs_sys?obsys=${this.state.boxNameSearched.toUpperCase()}&datafrom=2017-06-01&datato=2017-06-09`;
-        fetch(URL).then(response => response.text()).then(result => this.setState({obsList: result.split('<br/>').slice(1)}));
+        //console.log("new fetch ", this.state.url);
+        fetch(this.state.url).then(response => response.text()).then(result => this.setState({obsList: result.split('<br/>').slice(1)}));
     }
 
     render() {
@@ -180,9 +216,9 @@ class BoxTableData extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.boxNameSearched && prevState.boxNameSearched !== this.state.boxNameSearched.toUpperCase()) {
+        //if (this.state.boxNameSearched && prevState.url !== this.state.url) {
             this.fetchSearchBoxObservations();
-        }
+        //}
     }
 
 }
