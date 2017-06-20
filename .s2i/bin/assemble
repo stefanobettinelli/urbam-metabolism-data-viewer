@@ -7,6 +7,9 @@
 
 set -e
 
+pwd
+ls -l
+
 # FIXME: Linking of global modules is disabled for now as it causes npm failures
 #        under RHEL7
 # Global modules good to have
