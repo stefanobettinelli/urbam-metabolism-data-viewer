@@ -47,8 +47,6 @@ if [ ! -z "$NPM_MIRROR" ]; then
 	npm config set registry $NPM_MIRROR
 fi
 
-echo "---> Installing React and Serve"
-
 echo "---> Building your Node application from source"
 npm install
 npm build

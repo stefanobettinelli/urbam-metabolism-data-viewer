@@ -1,3 +1,4 @@
 #!/bin/sh -xe
 
-node node_modules/serve/bin/serve.js -p 8080 build
+ls -l
+npm deploy
