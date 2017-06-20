@@ -1,3 +1,6 @@
 #!/bin/sh -xe
 
-echo "test npm"
+pwd
+ls
+ls ..
+ls ../build
