@@ -1,4 +1,4 @@
 #!/bin/sh -xe
 
 ls -l
-npm deploy
+npm run deploy
