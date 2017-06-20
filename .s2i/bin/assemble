@@ -23,6 +23,7 @@ cp -Rf /tmp/src/. ./
 
 pwd
 ls -l
+npm install -g serve
 
 if [ ! -z $HTTP_PROXY ]; then
 	echo "---> Setting npm http proxy to $HTTP_PROXY"
