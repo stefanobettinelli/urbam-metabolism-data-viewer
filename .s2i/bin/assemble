@@ -48,7 +48,7 @@ if [ ! -z "$NPM_MIRROR" ]; then
 fi
 
 echo "---> Installing React and Serve"
-npm install -g create-react-app serve
+npm install create-react-app serve
 
 echo "---> Building your Node application from source"
 npm build
