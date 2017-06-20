@@ -48,7 +48,7 @@ if [ ! -z "$NPM_MIRROR" ]; then
 fi
 
 echo "---> Building your Node application from source"
-npm build ./
+npm run build ./
 
 pwd
 ls -l
