@@ -5,7 +5,7 @@
 # application folder.
 [ -d "/usr/src/app" ] && exit 0
 
-set -e
+#set -e
 
 # FIXME: Linking of global modules is disabled for now as it causes npm failures
 #        under RHEL7
@@ -53,6 +53,9 @@ fi
 
 echo "---> Building your Node application from source"
 npm build ./
+
+pwd
+ls -l
 
 # Fix source directory permissions
 fix-permissions ./

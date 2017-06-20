@@ -4,7 +4,6 @@
     <list default="true" id="6e8f33e7-7356-483c-bc83-8ba3bc0af28e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.s2i/bin/assemble" afterPath="$PROJECT_DIR$/.s2i/bin/assemble" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.s2i/bin/run" afterPath="$PROJECT_DIR$/.s2i/bin/run" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -44,8 +43,8 @@
       <file leaf-file-name="assemble" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.s2i/bin/assemble">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+            <state relative-caret-position="104">
+              <caret line="7" column="1" lean-forward="false" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -148,8 +147,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="443" />
-    <option name="y" value="15" />
+    <option name="x" value="849" />
+    <option name="y" value="19" />
     <option name="width" value="1936" />
     <option name="height" value="1013" />
   </component>
@@ -645,7 +644,7 @@
       <workItem from="1497522681576" duration="57788000" />
       <workItem from="1497959184056" duration="5024000" />
       <workItem from="1497971413309" duration="207000" />
-      <workItem from="1497971679340" duration="1988000" />
+      <workItem from="1497971679340" duration="2125000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit of MVP">
       <created>1497628121605</created>
@@ -717,14 +716,21 @@
       <option name="project" value="LOCAL" />
       <updated>1497977257559</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="aa">
+      <created>1497977286716</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1497977286716</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65007000" />
+    <option name="totallyTimeSpent" value="65144000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="443" y="15" width="1936" height="1013" extended-state="0" />
+    <frame x="849" y="19" width="1936" height="1013" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -925,8 +931,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.s2i/bin/assemble">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+        <state relative-caret-position="104">
+          <caret line="7" column="1" lean-forward="false" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
           <folding />
         </state>
       </provider>
