@@ -1,7 +1,3 @@
 #!/bin/sh -xe
 
-pwd
-ls
-ls ..
-
-cat npm-debug.log
+nodejs node_modules/serve/bin/serve.js -p 8080 build

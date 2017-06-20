@@ -53,7 +53,7 @@ npm install create-react-app serve
 ls -l node_modules
 
 echo "---> Building your Node application from source"
-npm build
+nodejs node_modules/create-react-app/createReactApp.js build
 
 # Fix source directory permissions
 fix-permissions ./
