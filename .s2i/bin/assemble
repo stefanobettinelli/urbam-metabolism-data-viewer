@@ -51,7 +51,7 @@ echo "---> Installing React and Serve"
 npm install -g create-react-app serve
 
 echo "---> Building your Node application from source"
-npm run build
+npm build
 
 ls -l
 
