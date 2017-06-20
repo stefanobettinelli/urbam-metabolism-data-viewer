@@ -48,8 +48,8 @@ if [ ! -z "$NPM_MIRROR" ]; then
 fi
 
 echo "---> Building your Node application from source"
-npm install -d
-npm run build
+npm install
+node node_modules/react-scripts/bin/react-scripts.js build
 
 # Fix source directory permissions
 fix-permissions ./
