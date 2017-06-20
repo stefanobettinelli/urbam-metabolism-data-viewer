@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # Prevent running assemble in builders different than official STI image.
 # The official nodejs:0.10-onbuild already run npm install and use different
@@ -48,11 +48,10 @@ if [ ! -z "$NPM_MIRROR" ]; then
 fi
 
 echo "---> Installing React and Serve"
-npm install -g create-react-app
-npm install -g serve
+npm install -g create-react-app serve
 
 echo "---> Building your Node application from source"
-npm run build ./
+npm run build
 
 ls -l
 
