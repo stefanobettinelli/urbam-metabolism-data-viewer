@@ -5,7 +5,7 @@
 # application folder.
 [ -d "/usr/src/app" ] && exit 0
 
-#set -e
+set -e
 
 # FIXME: Linking of global modules is disabled for now as it causes npm failures
 #        under RHEL7
@@ -20,10 +20,6 @@
 
 echo "---> Installing application source"
 cp -Rf /tmp/src/. ./
-
-pwd
-ls -l
-npm install -g serve
 
 if [ ! -z $HTTP_PROXY ]; then
 	echo "---> Setting npm http proxy to $HTTP_PROXY"
@@ -56,6 +52,7 @@ npm build ./
 
 pwd
 ls -l
+npm install -g serve
 
 # Fix source directory permissions
 fix-permissions ./
