@@ -7,9 +7,6 @@
 
 set -e
 
-pwd
-ls -l
-
 # FIXME: Linking of global modules is disabled for now as it causes npm failures
 #        under RHEL7
 # Global modules good to have
@@ -23,6 +20,9 @@ ls -l
 
 echo "---> Installing application source"
 cp -Rf /tmp/src/. ./
+
+pwd
+ls -l
 
 if [ ! -z $HTTP_PROXY ]; then
 	echo "---> Setting npm http proxy to $HTTP_PROXY"
