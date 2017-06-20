@@ -1,3 +1,3 @@
 #!/bin/sh -xe
 
-nodejs node_modules/serve/bin/serve.js -p 8080 build
+node node_modules/serve/bin/serve.js -p 8080 build

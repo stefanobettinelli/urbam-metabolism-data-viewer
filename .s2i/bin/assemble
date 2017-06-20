@@ -5,7 +5,7 @@
 # application folder.
 [ -d "/usr/src/app" ] && exit 0
 
-#set -e
+set -e
 
 # FIXME: Linking of global modules is disabled for now as it causes npm failures
 #        under RHEL7
@@ -53,7 +53,7 @@ npm install create-react-app serve
 ls -l node_modules
 
 echo "---> Building your Node application from source"
-nodejs node_modules/create-react-app/createReactApp.js build
+node node_modules/create-react-app/createReactApp.js build
 
 # Fix source directory permissions
 fix-permissions ./
