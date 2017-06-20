@@ -22,10 +22,10 @@ class App extends Component {
             hTo: '',
         };
 
-        this.onSearchChanged = this.onSearchChanged.bind(this);
+        this.onGetDataRequest = this.onGetDataRequest.bind(this);
     }
 
-    onSearchChanged(newSearchParams) {
+    onGetDataRequest(newSearchParams) {
         this.setState({
             boxNameSearched: newSearchParams.searchText,
             dateFrom: newSearchParams.dateFrom,
@@ -39,10 +39,13 @@ class App extends Component {
         const { boxNameSearched, dateFrom, hFrom, dateTo, hTo} = this.state;
         //const URL = `http://10.105.0.1:8080/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxNameSearched}&datafrom=${dateFrom}&h_from=${hFrom}&datato=${dateTo}&h_to=${hTo}`;
         //const URL = `http://10.105.0.1:8080/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxNameSearched.toUpperCase()}&datafrom=${dateFrom}&datato=${dateTo}`;
-        const URL = `http://localhost:8080/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxNameSearched.toUpperCase()}&datafrom=${dateFrom}&datato=${dateTo}`;
+        //const URL = `http://localhost:8080/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxNameSearched.toUpperCase()}&datafrom=${dateFrom}&datato=${dateTo}`;
+        const URL = `http://urbanclimate-rest.app.scll/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxNameSearched.toUpperCase()}&datafrom=${dateFrom}&h_from=${hFrom}&datato=${dateTo}&h_to=${hTo}`;
+        console.log(hFrom);
+        console.log(hTo);
         return (
             <div>
-                <SearchComponent callBackParent={(newSearchParams) => this.onSearchChanged(newSearchParams)}/>
+                <SearchComponent callBackParent={(newSearchParams) => this.onGetDataRequest(newSearchParams)}/>
                 <BoxTableData url={URL} boxName={this.state.boxNameSearched}/>
             </div>
         );
@@ -62,7 +65,7 @@ class SearchComponent extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleClickGetData = this.handleClickGetData.bind(this);
         this.handleDateFromChange = this.handleDateFromChange.bind(this);
         this.handleDateToChange = this.handleDateToChange.bind(this);
     }
@@ -71,7 +74,7 @@ class SearchComponent extends Component {
         this.setState({searchText: e.target.value});
     }
 
-    handleClick() {
+    handleClickGetData() {
         this.setState({isLoading: true});
 
         this.props.callBackParent(this.state);
@@ -83,7 +86,7 @@ class SearchComponent extends Component {
     }
 
     handleDateFromChange(e) {
-        const momentObject = e.format('YYYY-MM-DD,h:mm:ss').split(',');
+        const momentObject = e.format('YYYY-MM-DD,HH:MM:SS').split(',');
         this.setState({
             dateFrom: momentObject[0],
             hFrom: momentObject[1],
@@ -91,7 +94,7 @@ class SearchComponent extends Component {
     }
 
     handleDateToChange(e) {
-        const momentObject = e.format('YYYY-MM-DD,h:mm:ss').split(',');
+        const momentObject = e.format('YYYY-MM-DD,HH:MM:SS').split(',');
         this.setState({
             dateTo: momentObject[0],
             hTo: momentObject[1],
@@ -116,7 +119,7 @@ class SearchComponent extends Component {
                         <ControlLabel>Date To</ControlLabel>
                         <DateTime input={false} onChange={this.handleDateToChange}/>
                         <Button bsStyle="primary"
-                                onClick={!this.state.isLoading ? this.handleClick : null}
+                                onClick={!this.state.isLoading ? this.handleClickGetData : null}
                                 disabled={this.state.isLoading}
                         >
                             Get Data
@@ -216,9 +219,9 @@ class BoxTableData extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        //if (this.state.boxNameSearched && prevState.url !== this.state.url) {
+        if (this.state.boxNameSearched && prevState.url !== this.state.url) {
             this.fetchSearchBoxObservations();
-        //}
+        }
     }
 
 }
