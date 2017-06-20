@@ -51,8 +51,7 @@ echo "---> Installing React and Serve"
 
 echo "---> Building your Node application from source"
 npm install
-ll node_modules/
-node node_modules/react-scripts/bin/react-scripts.js build
+npm build
 
 # Fix source directory permissions
 fix-permissions ./
