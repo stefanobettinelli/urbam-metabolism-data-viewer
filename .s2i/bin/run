@@ -3,3 +3,5 @@
 pwd
 ls
 ls ..
+
+cat npm-debug.log
