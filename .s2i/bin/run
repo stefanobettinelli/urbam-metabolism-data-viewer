@@ -1,4 +1,10 @@
 #!/bin/sh -xe
 
+
+while true; do
+    sleep 20
+done
+
+
 ls -l
 npm run deploy

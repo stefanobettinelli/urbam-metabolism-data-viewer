@@ -58,7 +58,7 @@ npm install serve
 
 echo "---> Building your Node application from source"
 npm install
-npm run build
+#npm run build
 
 # Fix source directory permissions
 fix-permissions ./
