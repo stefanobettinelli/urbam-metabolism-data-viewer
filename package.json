@@ -13,6 +13,7 @@
     "react-scripts": "1.0.7"
   },
   "scripts": {
+    "deploy": "serve -p 8080 build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
