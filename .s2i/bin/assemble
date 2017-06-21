@@ -47,9 +47,12 @@ if [ ! -z "$NPM_MIRROR" ]; then
 	npm config set registry $NPM_MIRROR
 fi
 
+echo "---> Installing React and Serve"
+npm install create-react-app serve
+
 echo "---> Building your Node application from source"
 npm install
-node node_modules/react-scripts/bin/react-scripts.js build
+npm run build
 
 # Fix source directory permissions
 fix-permissions ./
