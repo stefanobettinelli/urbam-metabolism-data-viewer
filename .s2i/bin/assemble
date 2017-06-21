@@ -47,14 +47,19 @@ if [ ! -z "$NPM_MIRROR" ]; then
 	npm config set registry $NPM_MIRROR
 fi
 
-echo "---> Installing React"
-npm install create-react-app
+# Change the npm production to false
+if [ -z "$NPM_PROD" ]; then
+	echo "---> Setting the npm production to false"
+	NPM_PROD=false
+fi
+
 echo "---> Installing Serve"
 npm install serve
 
 echo "---> Building your Node application from source"
+npm config set -g production $NPM_PROD
 npm install
-#npm run build
+npm run build
 
 # Fix source directory permissions
 fix-permissions ./
