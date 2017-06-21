@@ -47,10 +47,6 @@ if [ ! -z "$NPM_MIRROR" ]; then
 	npm config set registry $NPM_MIRROR
 fi
 
-while true; do
-    sleep 20
-done
-
 echo "---> Installing React"
 npm install create-react-app
 echo "---> Installing Serve"
