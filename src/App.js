@@ -8,8 +8,9 @@ class App extends Component {
         super(props);
 
         this.state = {
+            hostname : '',
             isLoading: false,
-            boxNameSearched: '',
+            boxNameSearched: 'SSB_002',
             dateFrom: '',
             hFrom: '',
             dateTo: '',
@@ -21,6 +22,7 @@ class App extends Component {
 
     onGetDataRequest(newSearchParams) {
         this.setState({
+            hostname : window.location.href.includes('scll') || window.location.href.includes('10.105') ? 'urbanclimate-rest.app.scll' : '62.86.126.18:8080' ,
             boxNameSearched: newSearchParams.searchText,
             dateFrom: newSearchParams.dateFrom,
             hFrom: newSearchParams.hFrom,
@@ -30,8 +32,9 @@ class App extends Component {
     }
 
     render() {
-        const {boxNameSearched, dateFrom, hFrom, dateTo, hTo} = this.state;
-        const URL = `http://urbanclimate-rest.app.scll/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxNameSearched.toUpperCase()}&datafrom=${dateFrom}&h_from=${hFrom}&datato=${dateTo}&h_to=${hTo}`;
+        const {hostname, boxNameSearched, dateFrom, hFrom, dateTo, hTo} = this.state;
+        const URL = `http://${hostname}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxNameSearched.toUpperCase()}&datafrom=${dateFrom}&h_from=${hFrom}&datato=${dateTo}&h_to=${hTo}`;
+
         return (
             <div>
                 <SearchComponent callBackParent={(newSearchParams) => this.onGetDataRequest(newSearchParams)}/>
