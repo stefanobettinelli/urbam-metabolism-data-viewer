@@ -7,7 +7,7 @@ const convertArrayOfObjectsToCSV = (args) => {
         }
     );
 
-    return csvStringResult.replace(',',';');
+    return csvStringResult;
 };
 
 export {convertArrayOfObjectsToCSV};
