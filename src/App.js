@@ -22,7 +22,8 @@ class App extends Component {
 
     onGetDataRequest(newSearchParams) {
         this.setState({
-            hostname : window.location.href.includes('scll') || window.location.href.includes('10.105') ? 'urbanclimate-rest.app.scll' : '62.86.126.18:8080' ,
+            hostname : window.location.href.includes('scll') || window.location.href.includes('10.105') ? 'urbanclimate-rest.app.scll' : '62.86.126.18:8080',
+            //hostname: 'localhost:8080',
             boxNameSearched: newSearchParams.searchText,
             dateFrom: newSearchParams.dateFrom,
             hFrom: newSearchParams.hFrom,
