@@ -75,7 +75,7 @@ class BoxTableData extends Component {
                                 if (item) {
                                     return (
                                         <TableRow
-                                            rowData={item.split(',')}
+                                            rowData={item.split(';')}
                                             rowIndex={index}
                                         />
                                     );
