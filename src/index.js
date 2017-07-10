@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import obsTableApp from './reducers';
+import {createStore, applyMiddleware} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger'
+import rootReducer from './reducers';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import injectTapEventPlugin from "react-tap-event-plugin";
@@ -10,7 +12,14 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 injectTapEventPlugin();
 
-const store = createStore(obsTableApp);
+const loggerMiddleware = createLogger();
+const store = createStore(
+    rootReducer,
+    applyMiddleware(
+        thunkMiddleware, // lets us dispatch() functions
+        loggerMiddleware // neat middleware that logs actions
+    )
+);
 
 ReactDOM.render(
     <Provider store={store}>
@@ -20,8 +29,6 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
-
-console.log(store.getState());
 
 registerServiceWorker();
 

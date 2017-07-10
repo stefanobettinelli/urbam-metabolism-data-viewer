@@ -43,7 +43,6 @@ class BoxTableData extends Component {
     }
 
     render() {
-        console.log(this.state.obsList);
         return (
             <div>
                 <Button

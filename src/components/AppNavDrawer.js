@@ -3,6 +3,7 @@ import Drawer from "material-ui/Drawer";
 import AutoComplete from "material-ui/AutoComplete";
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
+import BoxListSelector from '../containers/BoxListSelector';
 
 // const DEFAULT_QUERY = `http://localhost:8080/obssys/search/`;
 // const PARAM_SEARCH = `findByNameStartsWith?name=SSB_`;
@@ -41,7 +42,6 @@ export default class AppNavDrawer extends React.Component {
     setBoxListNames(result) {
         let localBoxList = result._embedded.obssys.map((item) => item.name);
         this.setState({boxList: localBoxList});
-        console.log(localBoxList);
     }
 
     componentDidMount() {
@@ -52,6 +52,7 @@ export default class AppNavDrawer extends React.Component {
         return (
             <div>
                 <Drawer docked={true} open={true}>
+                    <BoxListSelector/>
                     <AutoComplete
                         floatingLabelText="type box name to search"
                         filter={AutoComplete.fuzzyFilter}
