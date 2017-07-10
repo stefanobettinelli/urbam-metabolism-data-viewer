@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import AppNavDrawer from "./components/AppNavDrawer";
+import AppNavDrawer from "./AppNavDrawer";
 import {
     Table,
     TableBody,
