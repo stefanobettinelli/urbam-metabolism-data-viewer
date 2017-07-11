@@ -24,6 +24,10 @@ export const fetchBoxList = (url) => {
     };
 };
 
-// export const boxSelected = () => {
-//     ...
-// };
+export const boxSelected = (boxNameList) => {
+    return {
+        type: BOX_SELECTED,
+        boxNameList,
+        receivedAt: Date.now()
+    };
+};
