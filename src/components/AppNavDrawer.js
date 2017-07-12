@@ -1,6 +1,7 @@
 import React from "react";
 import Drawer from "material-ui/Drawer";
 import MeterialUIForm from "./MaterialUIForm";
+import store from '../store';
 
 export default class AppNavDrawer extends React.Component {
 
@@ -33,11 +34,15 @@ export default class AppNavDrawer extends React.Component {
         this.fetchBoxListNames();
     }
 
+    submit = (values) => {
+        values["selectedBoxes"] = store.getState().selectedBoxes;
+    };
+
     render() {
         return (
             <div>
                 <Drawer docked={true} open={true}>
-                    <MeterialUIForm />
+                    <MeterialUIForm onSubmit={this.submit}/>
                 </Drawer>
             </div>
         );

@@ -1,28 +1,14 @@
-import React from 'react';
-import {Field, reduxForm} from 'redux-form';
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
-import RaisedButton from 'material-ui/RaisedButton';
-import BoxListSelector from '../containers/BoxListSelector';
+import React from "react";
+import {Field, reduxForm} from "redux-form";
+import {DatePicker, TimePicker} from "redux-form-material-ui";
+import RaisedButton from "material-ui/RaisedButton";
+import BoxListSelector from "../containers/BoxListSelector";
 
-const renderDatePickerField = props => (
-    <DatePicker
-        autoOk={true}
-        hintText={props.hintText}
-    />
-);
-
-const renderTimePicker = props => (
-    <TimePicker
-        autoOk={true}
-        format="24hr"
-        hintText={props.hintText}
-    />
-);
-
-const renderBoxList = props => (
-    <BoxListSelector/>
-);
+const renderBoxList = (props) => {
+    return (
+        <BoxListSelector/>
+    );
+};
 
 const MaterialUiForm = props => {
     const {handleSubmit, pristine, reset, submitting} = props;
@@ -32,20 +18,42 @@ const MaterialUiForm = props => {
                 <Field name="boxList" component={renderBoxList}/>
             </div>
             <div>
-                <Field name="dateFrom" hintText="From Date" component={renderDatePickerField}/>
+                <Field
+                    name="fromDate"
+                    component={DatePicker}
+                    format={null}
+                    hintText="From Date?"
+                />
             </div>
             <div>
-                <Field name="fromHours" hintText="From Hours" component={renderTimePicker}/>
+                <Field
+                    name="fromHours"
+                    autoOk={true}
+                    component={TimePicker}
+                    format={null}
+                    hintText="From Hours?"
+                />
             </div>
             <div>
-                <Field name="toDate" hintText="To Date" component={renderDatePickerField}/>
+                <Field
+                    name="toDate"
+                    component={DatePicker}
+                    format={null}
+                    hintText="To Date?"
+                />
             </div>
             <div>
-                <Field name="toHours" hintText="To Hours" component={renderTimePicker}/>
+                <Field
+                    name="toHours"
+                    autoOk={true}
+                    component={TimePicker}
+                    format={null}
+                    hintText="To Hours?"
+                />
             </div>
             <div>
-                <RaisedButton label="Submit" primary={true} type="submit" style={{margin:12}}/>
-                <RaisedButton label="Clear values" type="button" style={{margin:12}}/>
+                <RaisedButton label="Submit" primary={true} type="submit" style={{margin: 12}}/>
+                <RaisedButton label="Clear values" type="button" style={{margin: 12}}/>
             </div>
         </form>
     )

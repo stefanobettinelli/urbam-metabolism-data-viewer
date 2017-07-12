@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import {boxSelected} from '../actions';
 
 /**
  * `SelectField` can handle multiple selections. It is enabled with the `multiple` property.
@@ -14,7 +13,6 @@ export default class MultipleSelect extends Component {
 
     constructor(props) {
         super(props);
-
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -31,7 +29,6 @@ export default class MultipleSelect extends Component {
 
     handleChange (event, index, selected) {
         const {updatedSelectedBoxes} = this.props;
-        console.log(selected);
         updatedSelectedBoxes(selected);
         this.setState({selected});
     }

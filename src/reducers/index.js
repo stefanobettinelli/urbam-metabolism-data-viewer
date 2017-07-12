@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
 import selectedBoxes from './selectedBoxes';
-import fetchedBoxList from './fetchedBoxList'
+import fetchedBoxList from './fetchedBoxList';
+import {reducer as formReducer} from 'redux-form';
 
 const rootReducer = combineReducers({
     selectedBoxes,
-    fetchedBoxList
+    fetchedBoxList,
+    form: formReducer
 });
 
 export default rootReducer;

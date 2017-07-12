@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import AppNavDrawer from "./AppNavDrawer";
-import TabbedResults from './TabbedResults';
+import TabbedResultsContainer from '../containers/TabbedResultsContainer';
 
 class App extends Component {
     render() {
         return (
             <div style={{paddingLeft: '256px'}}>
                 <AppNavDrawer/>
-                <TabbedResults/>
+                <TabbedResultsContainer/>
             </div>
         );
     }
