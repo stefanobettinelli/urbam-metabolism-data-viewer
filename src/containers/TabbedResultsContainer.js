@@ -3,7 +3,8 @@ import TabbedResults from '../components/TabbedResults';
 
 const mapStateToProps = (state) => {
     return {
-        selectedBoxes: state.selectedBoxes
+        selectedBoxes: state.selectedBoxes,
+        fromDate: state.form.MaterialUiForm.values !== undefined ? state.form.MaterialUiForm.values.fromDate : null
     }
 };
 
