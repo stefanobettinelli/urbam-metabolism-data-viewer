@@ -22,6 +22,7 @@ const MaterialUiForm = props => {
                     name="fromDate"
                     component={DatePicker}
                     format={null}
+                    // formatDate={(value) => moment(value).format('YYYY-MM-DD')}
                     hintText="From Date?"
                 />
             </div>
