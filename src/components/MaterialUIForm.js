@@ -22,7 +22,6 @@ const MaterialUiForm = props => {
                     name="fromDate"
                     component={DatePicker}
                     format={null}
-                    // formatDate={(value) => moment(value).format('YYYY-MM-DD')}
                     hintText="From Date?"
                 />
             </div>
@@ -32,6 +31,7 @@ const MaterialUiForm = props => {
                     autoOk={true}
                     component={TimePicker}
                     format={null}
+                    props={{format: "24hr"}}
                     hintText="From Hours?"
                 />
             </div>
@@ -49,6 +49,7 @@ const MaterialUiForm = props => {
                     autoOk={true}
                     component={TimePicker}
                     format={null}
+                    props={{format: "24hr"}}
                     hintText="To Hours?"
                 />
             </div>
