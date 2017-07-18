@@ -59,7 +59,8 @@ class BoxTableData extends Component {
                     <tr>
                         <th>#</th>
                         <th>box name</th>
-                        <th>timestamp</th>
+                        <th>timestamp_cest</th>
+                        <th>timestamp_utc</th>
                         <th>co</th>
                         <th>co2</th>
                         <th>no2</th>
@@ -77,6 +78,7 @@ class BoxTableData extends Component {
                         this.state.obsList.map(
                             (item, index) => {
                                 if (item) {
+                                    //console.log("Item: ", item, " Index: ", index);
                                     return (
                                         <TableRow
                                             key={String(index)}
@@ -122,6 +124,7 @@ const TableRow = ({rowData, rowIndex}) => {
             <td>{rowData[9]}</td>
             <td>{rowData[10]}</td>
             <td>{rowData[11]}</td>
+            <td>{rowData[12]}</td>
         </tr>
     )
 };
