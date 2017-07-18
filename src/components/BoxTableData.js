@@ -43,7 +43,7 @@ class BoxTableData extends Component {
     }
 
     render() {
-        console.log(this.state.obsList);
+        //console.log(this.state.obsList);
         return (
             <div>
                 <Button
@@ -66,6 +66,10 @@ class BoxTableData extends Component {
                         <th>o3</th>
                         <th>pm2.5</th>
                         <th>pm10</th>
+                        <th>voc</th>
+                        <th>air_t_ds</th>
+                        <th>air_t_am</th>
+                        <th>rad_am</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -75,6 +79,7 @@ class BoxTableData extends Component {
                                 if (item) {
                                     return (
                                         <TableRow
+                                            key={String(index)}
                                             rowData={item.split(';')}
                                             rowIndex={index}
                                         />
@@ -113,6 +118,10 @@ const TableRow = ({rowData, rowIndex}) => {
             <td>{rowData[5]}</td>
             <td>{rowData[6]}</td>
             <td>{rowData[7]}</td>
+            <td>{rowData[8]}</td>
+            <td>{rowData[9]}</td>
+            <td>{rowData[10]}</td>
+            <td>{rowData[11]}</td>
         </tr>
     )
 };
