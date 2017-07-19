@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Table, Button} from "react-bootstrap";
 import {convertArrayOfObjectsToCSV} from '../commons/Helpers';
+import moment from 'moment';
 
 class BoxTableData extends Component {
     constructor(props) {
@@ -78,7 +79,11 @@ class BoxTableData extends Component {
                         this.state.obsList.map(
                             (item, index) => {
                                 if (item) {
-                                    //console.log("Item: ", item, " Index: ", index);
+                                    let colValues = item.split(';');
+                                    colValues.forEach(item => item.trim());
+                                    colValues[1] = moment(colValues[1]).format('YYYY-MM-DD HH:MM:ss');
+                                    colValues[2] = moment(colValues[2]).format('YYYY-MM-DD HH:MM:ss');
+                                    item = colValues.join(';');
                                     return (
                                         <TableRow
                                             key={String(index)}
