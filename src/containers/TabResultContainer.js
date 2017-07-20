@@ -2,11 +2,12 @@ import {connect} from 'react-redux';
 import TabResult from '../components/TabResult';
 import {fetchFilteredObservation} from '../actions';
 
-const mapStateToPros = (state) => {
-    return {
-        fetchFilteredObservation: state.fetchFilteredObservation,
-    }
-};
+// const mapStateToPros = (state) => {
+//     return {
+//         selectedBoxes: state.selectedBoxes,
+//         fetchFilteredObservation: state.fetchFilteredObservation,
+//     }
+// };
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -14,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const TabResultContainer = connect(mapStateToPros, mapDispatchToProps)(TabResult);
+const TabResultContainer = connect(null, mapDispatchToProps)(TabResult);
 
 export default TabResultContainer;
 

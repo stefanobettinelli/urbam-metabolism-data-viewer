@@ -42,13 +42,13 @@ class TabbedResults extends Component {
             <Tabs>
                 {
                     this.state.selectedBoxes.map(
-                        (boxName) => {
+                        (box) => {
                             const {fromDate, fromHours, toDate, toHours} = this.state;
                             let url =
-                                `http://${hostname}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
+                                `http://${hostname}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
                             return (
-                                <Tab key={String(boxName)} label={boxName}>
-                                    <TabResultContainer key={String(boxName)} label={boxName} url={url} boxName={boxName}/>
+                                <Tab key={String(box.boxName)} label={box.boxName}>
+                                    <TabResultContainer key={String(box.boxName)} label={box.boxName} url={url} boxName={box.boxName} csv={box.csv}/>
                                 </Tab>
                             );
                         }

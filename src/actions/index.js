@@ -1,5 +1,5 @@
 export const FETCH_BOX_LIST_SUCCESS = 'FETCH_BOX_LIST_SUCCESS';
-export const FETCH_FILTERED_OBSERVATION = 'FETCH_FILTERED_OBSERVATION';
+export const UPDATE_DATA_FOR_A_BOX = 'UPDATE_DATA_FOR_A_BOX';
 export const BOX_SELECTED = 'BOX_SELECTED';
 
 export const fetchBoxListSuccess = (json) => {
@@ -12,7 +12,7 @@ export const fetchBoxListSuccess = (json) => {
 
 export const fetchFilteredObservationSuccess = (csv, boxName) => {
     return {
-        type: FETCH_FILTERED_OBSERVATION,
+        type: UPDATE_DATA_FOR_A_BOX,
         boxName,
         csv,
         receivedAt: Date.now()

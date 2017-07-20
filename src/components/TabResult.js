@@ -29,11 +29,11 @@ class TabResult extends Component {
     }
 
     render() {
-        console.log("Tab component props: ", this.props);
-        const {boxName} = this.props;
+        const {boxName, csv} = this.props;
         return (
             <div key={String(boxName)} label={boxName}>
-                {boxName}
+                <h1> {boxName} </h1> <br/>
+                {/*{csv}*/}
             </div>
         );
     }
