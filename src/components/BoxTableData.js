@@ -81,8 +81,8 @@ class BoxTableData extends Component {
                                 if (item) {
                                     let colValues = item.split(';');
                                     colValues.forEach(item => item.trim());
-                                    colValues[1] = moment(colValues[1]).format('YYYY-MM-DD HH:MM:ss');
-                                    colValues[2] = moment(colValues[2]).format('YYYY-MM-DD HH:MM:ss');
+                                    colValues[1] = moment(colValues[1]).format('YYYY-MM-DD HH:mm:ss');
+                                    colValues[2] = moment(colValues[2]).format('YYYY-MM-DD HH:mm:ss');
                                     item = colValues.join(';');
                                     return (
                                         <TableRow
