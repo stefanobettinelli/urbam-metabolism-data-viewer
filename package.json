@@ -12,6 +12,7 @@
     "react-datetime": "^2.8.10",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
+    "react-table": "^6.5.1",
     "redux": "^3.7.1",
     "redux-form": "^6.8.0",
     "redux-form-material-ui": "^4.2.0",
