@@ -2,6 +2,7 @@ import React from "react";
 import Drawer from "material-ui/Drawer";
 import MeterialUIForm from "./MaterialUIForm";
 import store from '../store';
+import {HOSTNAME} from "../commons/Constants"
 
 export default class AppNavDrawer extends React.Component {
 
@@ -17,7 +18,7 @@ export default class AppNavDrawer extends React.Component {
     }
 
     fetchBoxListNames() {
-        fetch('http://localhost:8080/obssys/search/findByNameStartsWith?name=SSB_')
+        fetch(`http://${HOSTNAME}/obssys/search/findByNameStartsWith?name=SSB_`)
             .then(response => response.json())
             .then(result => this.setBoxListNames(result))
             .catch((error) => {

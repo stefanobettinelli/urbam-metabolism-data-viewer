@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import MultipleSelelect from '../components/MultipleSelelect';
+import MultipleSelect from '../components/MultipleSelect';
 import {fetchBoxList, boxSelected} from '../actions';
 
 const mapStateToProps = (state) => {
@@ -16,6 +16,6 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const BoxListSelector = connect(mapStateToProps, mapDispatchToProps)(MultipleSelelect);
+const MultipleSelectContainer = connect(mapStateToProps, mapDispatchToProps)(MultipleSelect);
 
-export default BoxListSelector;
+export default MultipleSelectContainer;

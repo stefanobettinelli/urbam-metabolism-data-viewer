@@ -7,7 +7,7 @@ class BoxTableData extends Component {
         super(props);
         this.state = {
             url: '',
-            boxNameSearched: 'SSB_002',
+            boxNameSearched: '',
             obsList: [],
         };
 

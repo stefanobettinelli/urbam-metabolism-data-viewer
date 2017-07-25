@@ -2,11 +2,11 @@ import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {DatePicker, TimePicker} from "redux-form-material-ui";
 import RaisedButton from "material-ui/RaisedButton";
-import BoxListSelector from "../containers/BoxListSelector";
+import MultipleSelectContainer from "../containers/MultipleSelectContainer";
 
 const renderBoxList = (props) => {
     return (
-        <BoxListSelector/>
+        <MultipleSelectContainer/>
     );
 };
 
@@ -54,7 +54,7 @@ const MaterialUiForm = props => {
                 />
             </div>
             <div>
-                <RaisedButton label="Submit" primary={true} type="submit" style={{margin: 12}}/>
+                {/*<RaisedButton label="Submit" primary={true} type="submit" style={{margin: 12}}/>*/}
                 <RaisedButton label="Clear values" type="button" style={{margin: 12}}/>
             </div>
         </form>

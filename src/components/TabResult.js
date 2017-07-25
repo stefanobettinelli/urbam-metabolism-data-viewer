@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import ReactTable from 'react-table';
-import {getHeaderAsJSONFromCSVText, convertCSVBlobTextToListOfJSON} from '../commons/Helpers';
+import {getHeaderAsJSONFromCSVText, convertCSVBlobTextToListOfJSON, convertArrayOfObjectsToCSV} from '../commons/Helpers';
+import RaisedButton from "material-ui/RaisedButton";
 
 import 'react-table/react-table.css';
 
@@ -14,6 +15,7 @@ class TabResult extends Component {
         };
 
         this.fetchData = this.fetchData.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -21,9 +23,9 @@ class TabResult extends Component {
     }
 
     fetchData() {
-        const {url} = this.props;
+        const {url, boxName} = this.props;
         this.setState({url});
-        this.props.fetchCSVData(url, this.props.boxName);
+        this.props.fetchCSVData(url, boxName);
     }
 
     componentDidUpdate() {
@@ -32,56 +34,42 @@ class TabResult extends Component {
         }
     }
 
+    handleClick() {
+        const {csv, boxName, fromDate, toDate, fromHours, toHours} = this.props;
+        if (!csv) return;
+
+        let data, filename, link;
+        let csvText = convertArrayOfObjectsToCSV(csv.split('<br/>').slice(1));
+
+        filename = `exportBox_${boxName}_from_${fromDate}_at_${fromHours}_to_${toDate}_at_${toHours}.csv`;
+
+        if (!csvText.match(/^data:text\/csv/i)) {
+            csvText = 'data:text/csv;charset=utf-8,' + csvText;
+        }
+        data = encodeURI(csvText);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    }
+
     render() {
         const {csv} = this.props;
 
         const header = getHeaderAsJSONFromCSVText(csv);
         const csvData = convertCSVBlobTextToListOfJSON(csv);
-        // console.log("CSV header ", header);
-        console.log("CSV content ", csvData);
-
-        const data = [
-            {
-                name: 'Tanner Linsley',
-                age: 26,
-                friend: {
-                    name: 'Jason Maurer',
-                    age: 23,
-                }
-            },
-            {
-                name: 'Tanner Linsley',
-                age: 26,
-                friend: {
-                    name: 'Jason Maurer',
-                    age: 23,
-                }
-            }
-        ];
-
-        // const columns = [{
-        //     Header: 'Name',
-        //     accessor: 'name' // String-based value accessors!
-        // }, {
-        //     Header: 'Age',
-        //     accessor: 'age',
-        //     Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
-        // }, {
-        //     id: 'friendName', // Required because our accessor is not a string
-        //     Header: 'Friend Name',
-        //     accessor: d => d.friend.name // Custom value accessors!
-        // }, {
-        //     Header: props => <span>Friend Age</span>, // Custom header components!
-        //     accessor: 'friend.age'
-        // }];
 
         const columns = header ? [...header] : [];
 
         return (
-            <ReactTable
-                data={csvData}
-                columns={columns}
-            />
+            <div>
+                <RaisedButton disabled={!csvData || csvData.length < 1} onTouchTap={this.handleClick} label="Download CSV" primary={true} type="submit" style={{margin: 12}}/>
+                <ReactTable
+                    data={csvData}
+                    columns={columns}
+                />
+            </div>
         );
     }
 

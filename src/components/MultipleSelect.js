@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import {HOSTNAME} from "../commons/Constants"
 
 /**
  * `SelectField` can handle multiple selections. It is enabled with the `multiple` property.
@@ -17,7 +18,7 @@ export default class MultipleSelect extends Component {
     }
 
     componentDidMount() {
-        const url = 'http://localhost:8080/obssys/search/findByNameStartsWith?name=SSB_';
+        const url = `http://${HOSTNAME}/obssys/search/findByNameStartsWith?name=SSB_`;
         this.props.fetchData(url);
     }
 

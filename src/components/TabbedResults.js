@@ -48,7 +48,13 @@ class TabbedResults extends Component {
                                 `http://${hostname}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
                             return (
                                 <Tab key={String(box.boxName)} label={box.boxName}>
-                                    <TabResultContainer key={String(box.boxName)} label={box.boxName} url={url} boxName={box.boxName} csv={box.csv}/>
+                                    <TabResultContainer
+                                        key={String(box.boxName)} label={box.boxName} url={url} boxName={box.boxName} csv={box.csv}
+                                        fromDate={this.state.fromDate}
+                                        toDate={this.state.toDate}
+                                        fromHours={this.state.fromHours}
+                                        toHours={this.state.toHours}
+                                    />
                                 </Tab>
                             );
                         }
