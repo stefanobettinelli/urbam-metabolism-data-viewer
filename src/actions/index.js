@@ -1,6 +1,7 @@
 export const FETCH_BOX_LIST_SUCCESS = 'FETCH_BOX_LIST_SUCCESS';
 export const UPDATE_DATA_FOR_A_BOX = 'UPDATE_DATA_FOR_A_BOX';
 export const BOX_SELECTED = 'BOX_SELECTED';
+export const CLEAR_SELECTED_BOX_LIST = 'CLEAR_SELECTED_BOX_LIST';
 
 export const fetchBoxListSuccess = (json) => {
     return {
@@ -54,5 +55,11 @@ export const boxSelected = (boxNameList) => {
         type: BOX_SELECTED,
         boxNameList,
         receivedAt: Date.now()
+    };
+};
+
+export const clearSelectedBoxList = () => {
+    return {
+        type: CLEAR_SELECTED_BOX_LIST
     };
 };

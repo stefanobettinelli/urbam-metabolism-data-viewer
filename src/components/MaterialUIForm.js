@@ -3,6 +3,8 @@ import {Field, reduxForm} from "redux-form";
 import {DatePicker, TimePicker} from "redux-form-material-ui";
 import RaisedButton from "material-ui/RaisedButton";
 import MultipleSelectContainer from "../containers/MultipleSelectContainer";
+import store from '../store';
+import {clearSelectedBoxList} from "../actions";
 
 const renderBoxList = (props) => {
     return (
@@ -55,7 +57,15 @@ const MaterialUiForm = props => {
             </div>
             <div>
                 {/*<RaisedButton label="Submit" primary={true} type="submit" style={{margin: 12}}/>*/}
-                <RaisedButton label="Clear values" type="button" style={{margin: 12}}/>
+                <RaisedButton
+                    onTouchTap={
+                        () => {
+                            reset();
+                            store.dispatch(clearSelectedBoxList())
+                        }
+                    }
+                    label="Clear values" type="button" style={{margin: 12}}
+                />
             </div>
         </form>
     )

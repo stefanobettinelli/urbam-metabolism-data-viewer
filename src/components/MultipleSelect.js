@@ -8,8 +8,7 @@ import {HOSTNAME} from "../commons/Constants"
  */
 export default class MultipleSelect extends Component {
     state = {
-        values: [],
-        selected: []
+        values: []
     };
 
     constructor(props) {
@@ -47,7 +46,8 @@ export default class MultipleSelect extends Component {
     }
 
     render() {
-        const {values, selected} = this.state;
+        const {values} = this.state;
+        let selected = this.props.selectedBoxes.map(boxObj => boxObj.boxName );
         return (
             <SelectField
                 multiple={true}
@@ -55,7 +55,7 @@ export default class MultipleSelect extends Component {
                 value={selected}
                 onChange={this.handleChange}
             >
-                {this.menuItems(values, selected)}
+                { this.menuItems(values, selected) }
             </SelectField>
         );
     }
