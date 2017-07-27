@@ -1,7 +1,12 @@
 import React, {Component} from "react";
 import ReactTable from 'react-table';
-import {getHeaderAsJSONFromCSVText, convertCSVBlobTextToListOfJSON, convertArrayOfObjectsToCSV} from '../commons/Helpers';
+import {
+    getHeaderAsJSONFromCSVText,
+    convertCSVBlobTextToListOfJSON,
+    convertArrayOfObjectsToCSV
+} from '../commons/Helpers';
 import RaisedButton from "material-ui/RaisedButton";
+import moment from "moment";
 
 import 'react-table/react-table.css';
 
@@ -23,6 +28,12 @@ class TabResult extends Component {
     }
 
     fetchData() {
+        const {fromDate, toDate, fromHours, toHours} = this.props;
+        if (!moment(`${fromDate} ${fromHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid() || !moment(`${toDate} ${toHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid()) {
+            console.log(moment(`${fromDate} ${fromHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid(), moment(`${toDate} ${toHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid());
+            return;
+        }
+
         const {url, boxName} = this.props;
         this.setState({url});
         this.props.fetchCSVData(url, boxName);
@@ -64,7 +75,8 @@ class TabResult extends Component {
 
         return (
             <div>
-                <RaisedButton disabled={!csvData || csvData.length < 1} onTouchTap={this.handleClick} label="Download CSV" primary={true} type="submit" style={{margin: 12}}/>
+                <RaisedButton disabled={!csvData || csvData.length < 1} onTouchTap={this.handleClick}
+                              label="Download CSV" primary={true} type="submit" style={{margin: 12}}/>
                 <ReactTable
                     data={csvData}
                     columns={columns}

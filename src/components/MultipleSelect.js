@@ -3,9 +3,6 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import {HOSTNAME} from "../commons/Constants"
 
-/**
- * `SelectField` can handle multiple selections. It is enabled with the `multiple` property.
- */
 export default class MultipleSelect extends Component {
     state = {
         values: []
@@ -14,6 +11,7 @@ export default class MultipleSelect extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.menuItems = this.menuItems.bind(this);
     }
 
     componentDidMount() {
@@ -34,13 +32,15 @@ export default class MultipleSelect extends Component {
     }
 
     menuItems(values, selected) {
-        return values.map((box) => (
+        const boxNameList = values.map(obj => obj.name);
+        boxNameList.sort();
+        return boxNameList.map((boxName) => (
             <MenuItem
-                key={String(box.name)}
+                key={String(boxName)}
                 insetChildren={true}
-                checked={selected && selected.indexOf(box.name) > -1}
-                value={box.name}
-                primaryText={box.name}
+                checked={selected && selected.indexOf(boxName) > -1}
+                value={boxName}
+                primaryText={boxName}
             />
         ));
     }
@@ -51,7 +51,7 @@ export default class MultipleSelect extends Component {
         return (
             <SelectField
                 multiple={true}
-                hintText="Select a name"
+                hintText="Select a Sensor Box"
                 value={selected}
                 onChange={this.handleChange}
             >

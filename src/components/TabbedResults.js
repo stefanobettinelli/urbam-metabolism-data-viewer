@@ -21,13 +21,13 @@ class TabbedResults extends Component {
             this.state.selectedBoxes !== this.props.selectedBoxes ||
             moment(this.state.fromDate).format('YYYY-MM-DD') !== moment(this.props.fromDate).format('YYYY-MM-DD') ||
             moment(this.state.toDate).format('YYYY-MM-DD') !== moment(this.props.toDate).format('YYYY-MM-DD') ||
-            this.state.fromHours !== moment(this.props.fromHours).format('HH:mm:ss') ||
-            this.state.toHours !== moment(this.props.toHours).format('HH:mm:ss')
+            this.state.fromHours !== moment(this.props.fromHours).utc().format('HH:mm:ss') ||
+            this.state.toHours !== moment(this.props.toHours).utc().format('HH:mm:ss')
         ) {
             const fromDate = moment(this.props.fromDate).format('YYYY-MM-DD');
             const toDate = moment(this.props.toDate).format('YYYY-MM-DD');
-            const fromHours = moment(this.props.fromHours).format('HH:mm:ss');
-            const toHours = moment(this.props.toHours).format('HH:mm:ss');
+            const fromHours = moment(this.props.fromHours).utc().format('HH:mm:ss');
+            const toHours = moment(this.props.toHours).utc().format('HH:mm:ss');
             this.setState({selectedBoxes: this.props.selectedBoxes});
             this.setState({fromDate});
             this.setState({toDate});
@@ -44,6 +44,7 @@ class TabbedResults extends Component {
                     this.state.selectedBoxes.map(
                         (box) => {
                             const {fromDate, fromHours, toDate, toHours} = this.state;
+                            //console.log("UTC!!!", fromHours, toHours);
                             let url =
                                 `http://${hostname}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
                             return (
