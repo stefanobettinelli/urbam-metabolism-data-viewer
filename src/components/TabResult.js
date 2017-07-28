@@ -7,6 +7,7 @@ import {
 } from '../commons/Helpers';
 import RaisedButton from "material-ui/RaisedButton";
 import moment from "moment";
+import {D_FORMAT, T_FORMAT} from "../commons/Constants"
 
 import 'react-table/react-table.css';
 
@@ -29,8 +30,7 @@ class TabResult extends Component {
 
     fetchData() {
         const {fromDate, toDate, fromHours, toHours} = this.props;
-        if (!moment(`${fromDate} ${fromHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid() || !moment(`${toDate} ${toHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid()) {
-            //console.log(moment(`${fromDate} ${fromHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid(), moment(`${toDate} ${toHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid());
+        if (!moment(`${fromDate} ${fromHours}`, `${D_FORMAT} ${T_FORMAT}`, true).isValid() || !moment(`${toDate} ${toHours}`, `${D_FORMAT} ${T_FORMAT}`, true).isValid()) {
             return;
         }
 
