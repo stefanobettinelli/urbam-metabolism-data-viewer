@@ -1,14 +1,13 @@
 import React, {Component} from "react";
 import {Table, Button} from "react-bootstrap";
 import {convertArrayOfObjectsToCSV} from '../commons/Helpers';
-import moment from 'moment';
 
 class BoxTableData extends Component {
     constructor(props) {
         super(props);
         this.state = {
             url: '',
-            boxNameSearched: 'SSB_002',
+            boxNameSearched: '',
             obsList: [],
         };
 
@@ -44,7 +43,6 @@ class BoxTableData extends Component {
     }
 
     render() {
-        //console.log(this.state.obsList);
         return (
             <div>
                 <Button
@@ -60,18 +58,13 @@ class BoxTableData extends Component {
                     <tr>
                         <th>#</th>
                         <th>box name</th>
-                        <th>timestamp_cest</th>
-                        <th>timestamp_utc</th>
+                        <th>timestamp</th>
                         <th>co</th>
                         <th>co2</th>
                         <th>no2</th>
                         <th>o3</th>
                         <th>pm2.5</th>
                         <th>pm10</th>
-                        <th>voc</th>
-                        <th>air_t_ds</th>
-                        <th>air_t_am</th>
-                        <th>rad_am</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -79,15 +72,9 @@ class BoxTableData extends Component {
                         this.state.obsList.map(
                             (item, index) => {
                                 if (item) {
-                                    let colValues = item.split(';');
-                                    colValues.forEach(item => item.trim());
-                                    colValues[1] = moment(colValues[1]).format('YYYY-MM-DD HH:mm:ss');
-                                    colValues[2] = moment(colValues[2]).format('YYYY-MM-DD HH:mm:ss');
-                                    item = colValues.join(';');
                                     return (
                                         <TableRow
-                                            key={String(index)}
-                                            rowData={item.split(';')}
+                                            rowData={item.split(',')}
                                             rowIndex={index}
                                         />
                                     );
@@ -125,11 +112,6 @@ const TableRow = ({rowData, rowIndex}) => {
             <td>{rowData[5]}</td>
             <td>{rowData[6]}</td>
             <td>{rowData[7]}</td>
-            <td>{rowData[8]}</td>
-            <td>{rowData[9]}</td>
-            <td>{rowData[10]}</td>
-            <td>{rowData[11]}</td>
-            <td>{rowData[12]}</td>
         </tr>
     )
 };

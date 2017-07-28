@@ -3,18 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "es6-promise": "^4.1.1",
+    "isomorphic-fetch": "^2.2.1",
     "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
     "react-datepicker": "^0.47.0",
     "react-datetime": "^2.8.10",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "react-table": "^6.5.1",
+    "redux": "^3.7.1",
+    "redux-form": "^6.8.0",
+    "redux-form-material-ui": "^4.2.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
   },
   "scripts": {
-    "deploy": "serve -p 8080 build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
