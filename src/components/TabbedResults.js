@@ -3,6 +3,7 @@ import {Tab, Tabs} from "material-ui/Tabs";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 import moment from "moment";
 import TabResultContainer from "../containers/TabResultContainer";
+import {D_FORMAT, T_FORMAT} from "../commons/Constants";
 
 class TabbedResults extends Component {
     constructor(props) {
@@ -17,22 +18,39 @@ class TabbedResults extends Component {
     }
 
     componentDidUpdate() {
+        const fromHoursString = moment(this.props.fromHours).format(T_FORMAT);
+        const fromDateString = moment(this.props.fromDate).format(D_FORMAT);
+        const toHoursString = moment(this.props.toHours).format(T_FORMAT);
+        const toDateString = moment(this.props.toDate).format(D_FORMAT);
+
+        const propFromDateUTC = moment(`${fromDateString} ${fromHoursString}`).utc().format(D_FORMAT);
+        const propToDateUTC = moment(`${toDateString} ${toHoursString}`).utc().format(D_FORMAT);
+        const propFromHoursUTC = moment(`${fromDateString} ${fromHoursString}`).utc().format(T_FORMAT);
+        const propToHoursUTC = moment(`${toDateString} ${toHoursString}`).utc().format(T_FORMAT);
+
+        // console.log("FULL TO UTC FROM DATE ==> ",moment(`${fromDateString} ${fromHoursString}`).utc().format(D_FORMAT));
+        // console.log("FULL TO UTC FROM TIME ==> ",moment(`${fromDateString} ${fromHoursString}`).utc().format(T_FORMAT));
+        // console.log("FULL TO UTC TO DATE ==> ",moment(`${toDateString} ${toHoursString}`).utc().format(D_FORMAT));
+        // console.log("FULL TO UTC TO TIME ==> ",moment(`${toDateString} ${toHoursString}`).utc().format(T_FORMAT));
+
         if (
             this.state.selectedBoxes !== this.props.selectedBoxes ||
-            moment(this.state.fromDate).format('YYYY-MM-DD') !== moment(this.props.fromDate).format('YYYY-MM-DD') ||
-            moment(this.state.toDate).format('YYYY-MM-DD') !== moment(this.props.toDate).format('YYYY-MM-DD') ||
-            this.state.fromHours !== moment(this.props.fromHours).utc().format('HH:mm:ss') ||
-            this.state.toHours !== moment(this.props.toHours).utc().format('HH:mm:ss')
+            moment(this.state.fromDate).format(D_FORMAT) !== propFromDateUTC ||
+            moment(this.state.toDate).format(D_FORMAT) !== propToDateUTC ||
+            this.state.fromHours !== propFromHoursUTC ||
+            this.state.toHours !== propToHoursUTC
         ) {
-            const fromDate = moment(this.props.fromDate).format('YYYY-MM-DD');
-            const toDate = moment(this.props.toDate).format('YYYY-MM-DD');
-            const fromHours = moment(this.props.fromHours).utc().format('HH:mm:ss');
-            const toHours = moment(this.props.toHours).utc().format('HH:mm:ss');
+
+            const fromDate = propFromDateUTC;
+            const toDate = propToDateUTC;
+            const fromHours = propFromHoursUTC;
+            const toHours = propToHoursUTC;
             this.setState({selectedBoxes: this.props.selectedBoxes});
             this.setState({fromDate});
             this.setState({toDate});
             this.setState({fromHours});
             this.setState({toHours});
+
         }
     }
 
@@ -44,7 +62,6 @@ class TabbedResults extends Component {
                     this.state.selectedBoxes.map(
                         (box) => {
                             const {fromDate, fromHours, toDate, toHours} = this.state;
-                            //console.log("UTC!!!", fromHours, toHours);
                             let url =
                                 `http://${hostname}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
                             return (
@@ -55,6 +72,10 @@ class TabbedResults extends Component {
                                         toDate={this.state.toDate}
                                         fromHours={this.state.fromHours}
                                         toHours={this.state.toHours}
+                                        fromDateLocal={moment(this.props.fromDate).format(D_FORMAT)}
+                                        toDateLocal={moment(this.props.toDate).format(D_FORMAT)}
+                                        fromHoursLocal={moment(this.props.fromHours).format(T_FORMAT)}
+                                        toHoursLocal={moment(this.props.toHours).format(T_FORMAT)}
                                     />
                                 </Tab>
                             );

@@ -30,7 +30,7 @@ class TabResult extends Component {
     fetchData() {
         const {fromDate, toDate, fromHours, toHours} = this.props;
         if (!moment(`${fromDate} ${fromHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid() || !moment(`${toDate} ${toHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid()) {
-            console.log(moment(`${fromDate} ${fromHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid(), moment(`${toDate} ${toHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid());
+            //console.log(moment(`${fromDate} ${fromHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid(), moment(`${toDate} ${toHours}`, "YYYY-MM-DD HH:mm:ss", true).isValid());
             return;
         }
 
@@ -46,13 +46,13 @@ class TabResult extends Component {
     }
 
     handleClick() {
-        const {csv, boxName, fromDate, toDate, fromHours, toHours} = this.props;
+        const {csv, boxName, fromDateLocal, toDateLocal, fromHoursLocal, toHoursLocal} = this.props;
         if (!csv) return;
 
         let data, filename, link;
         let csvText = convertArrayOfObjectsToCSV(csv.split('<br/>').slice(1));
 
-        filename = `exportBox_${boxName}_from_${fromDate}_at_${fromHours}_to_${toDate}_at_${toHours}.csv`;
+        filename = `exportBox_${boxName}_from_${fromDateLocal}_at_${fromHoursLocal}_to_${toDateLocal}_at_${toHoursLocal}.csv`;
 
         if (!csvText.match(/^data:text\/csv/i)) {
             csvText = 'data:text/csv;charset=utf-8,' + csvText;
