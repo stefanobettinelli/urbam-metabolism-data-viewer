@@ -7,7 +7,7 @@ class BoxTableData extends Component {
         super(props);
         this.state = {
             url: '',
-            boxNameSearched: 'SSB_002',
+            boxNameSearched: '',
             obsList: [],
         };
 
@@ -43,7 +43,6 @@ class BoxTableData extends Component {
     }
 
     render() {
-        console.log(this.state.obsList);
         return (
             <div>
                 <Button
