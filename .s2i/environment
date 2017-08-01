@@ -1,2 +1,1 @@
-NODE_ENV=dev
-NPM_CONFIG_LOGLEVEL=warn
+NODE_ENV=development
