@@ -1,1 +1,3 @@
 NODE_ENV=development
+NPM_CONFIG_LOGLEVEL=http
+NPM_RUN=deploy
