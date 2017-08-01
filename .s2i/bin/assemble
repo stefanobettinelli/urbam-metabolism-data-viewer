@@ -55,8 +55,8 @@ fi
 echo "---> Installing Serve"
 npm install serve
 
-echo "---> Installing react-scripts"
-npm install react-scripts
+#echo "---> Installing react-scripts"
+#npm install react-scripts
 
 echo "---> Building your Node application from source"
 npm install
@@ -64,9 +64,9 @@ npm run build
 
 echo "---> Installing application"
 mv -f package.json $HOME
-mv -Rf build $HOME
+mv -f build $HOME
 mv -f node_modules $HOME
 rm -rf .
 
 # Fix source directory permissions
-fix-permissions ./
+fix-permissions $HOME
