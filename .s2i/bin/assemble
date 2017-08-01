@@ -63,8 +63,9 @@ npm install
 npm run build
 
 echo "---> Installing application"
-cp -f package.json $HOME
-cp -Rf ./build $HOME
+mv -f package.json $HOME
+mv -Rf build $HOME
+mv -f node_modules $HOME
 rm -rf .
 
 # Fix source directory permissions
