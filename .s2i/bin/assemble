@@ -67,4 +67,4 @@ cd $HOME
 rm -rf /tmp/src/
 
 # Fix source directory permissions
-fix-permissions $HOME
+fix-permissions ./
