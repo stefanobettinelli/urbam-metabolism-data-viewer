@@ -7,6 +7,8 @@
 
 set -e
 
+cd /tmp/src/
+
 # FIXME: Linking of global modules is disabled for now as it causes npm failures
 #        under RHEL7
 # Global modules good to have
@@ -17,9 +19,6 @@ set -e
 #module_list=$(/usr/bin/comm -12 <(echo "${global_modules}") | tr '\n' ' ')
 # Link the modules
 #npm link $module_list
-
-echo "---> Installing application source"
-cp -Rf /tmp/src/. ./
 
 if [ ! -z $HTTP_PROXY ]; then
 	echo "---> Setting npm http proxy to $HTTP_PROXY"
@@ -56,9 +55,17 @@ fi
 echo "---> Installing Serve"
 npm install serve
 
+echo "---> Installing react-scripts"
+npm install react-scripts
+
 echo "---> Building your Node application from source"
 npm install
 npm run build
+
+echo "---> Installing application"
+cp -f package.json $HOME
+cp -Rf ./build $HOME
+rm -rf .
 
 # Fix source directory permissions
 fix-permissions ./
