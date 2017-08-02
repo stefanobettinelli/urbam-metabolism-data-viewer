@@ -1,0 +1,15 @@
+#!/bin/sh -xe
+
+pushd ${HOME} >/dev/null
+
+echo "---> Saving artifacts"
+
+# ${HOME}/node_modules is the node repo dir
+# ${HOME}/build is the files from the previous build
+if [ -d ./build ]; then
+    tar cf - ./node_modules ./build
+else
+    tar cf - ./node_modules
+fi
+
+popd >/dev/null
