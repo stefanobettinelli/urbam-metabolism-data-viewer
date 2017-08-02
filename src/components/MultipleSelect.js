@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import {HOSTNAME} from "../commons/Constants"
+import {REST_API_HOSTNAME} from "../commons/Constants"
 
 export default class MultipleSelect extends Component {
     state = {
@@ -15,7 +15,7 @@ export default class MultipleSelect extends Component {
     }
 
     componentDidMount() {
-        const url = `http://${HOSTNAME}/obssys/search/findByNameStartsWith?name=SSB_`;
+        const url = `http://${REST_API_HOSTNAME}/obssys/search/findByNameStartsWith?name=SSB_`;
         this.props.fetchData(url);
     }
 

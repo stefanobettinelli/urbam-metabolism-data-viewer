@@ -4,6 +4,7 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 import moment from "moment";
 import TabResultContainer from "../containers/TabResultContainer";
 import {D_FORMAT, T_FORMAT} from "../commons/Constants";
+import {REST_API_HOSTNAME} from "../commons/Constants"
 
 class TabbedResults extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class TabbedResults extends Component {
     }
 
     render() {
-        const hostname = "localhost:8080";
+        // const hostname = "localhost:8080"; // ma ti pare?
         return (
             <Tabs>
                 {
@@ -63,7 +64,7 @@ class TabbedResults extends Component {
                         (box) => {
                             const {fromDate, fromHours, toDate, toHours} = this.state;
                             let url =
-                                `http://${hostname}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
+                                `http://${REST_API_HOSTNAME}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
                             return (
                                 <Tab key={String(box.boxName)} label={box.boxName}>
                                     <TabResultContainer
