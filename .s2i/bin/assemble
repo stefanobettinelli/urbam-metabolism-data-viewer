@@ -1,5 +1,15 @@
 #!/bin/bash
 
+function restore_saved_artifacts() {
+  if [ "$(ls -A /opt/s2i/destination/artifacts/ 2>/dev/null)" ]; then
+    echo -n "Restoring saved artifacts from prior build..."
+    mv /opt/s2i/destination/artifacts/node_modules $HOME
+    if [ -d ./build ]; then
+        mv /opt/s2i/destination/artifacts/build $HOME/
+    fi
+  fi
+}
+
 # Prevent running assemble in builders different than official STI image.
 # The official nodejs:0.10-onbuild already run npm install and use different
 # application folder.
@@ -7,7 +17,7 @@
 
 set -e
 
-cd /tmp/src/
+mv -f /tmp/src/* ./
 
 # FIXME: Linking of global modules is disabled for now as it causes npm failures
 #        under RHEL7
@@ -52,19 +62,14 @@ if [ ! -z "$NPM_PROD" ]; then
 	npm config set -g production $NPM_PROD
 fi
 
+restore_saved_artifacts
+
 echo "---> Installing Serve"
 npm install serve
 
 echo "---> Building your Node application from source"
 npm install
 npm run build
-
-echo "---> Installing application"
-mv -f package.json $HOME
-mv -f build $HOME
-mv -f node_modules $HOME
-cd $HOME
-rm -rf /tmp/src/
 
 # Fix source directory permissions
 fix-permissions ./
