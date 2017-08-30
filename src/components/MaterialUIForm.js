@@ -56,7 +56,6 @@ const MaterialUiForm = props => {
                 />
             </div>
             <div>
-                {/*<RaisedButton label="Submit" primary={true} type="submit" style={{margin: 12}}/>*/}
                 <RaisedButton
                     onTouchTap={
                         () => {

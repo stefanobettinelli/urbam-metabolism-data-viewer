@@ -242,7 +242,7 @@ Visual Studio Code supports debugging out of the box with Create React App. This
 
 You would need to have the latest version of [VS Code](https://code.visualstudio.com) and VS Code [Chrome Debugger Extension](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) installed.
 
-Then add the block below to your `launch.json` file and put it inside the `.vscode` folder in your app’s root directory.
+Then add the block below to your `launch.json` file and put it inside the `.vscode` folder in your app’s r  oot directory.
 
 ```json
 {

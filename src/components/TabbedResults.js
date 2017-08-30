@@ -19,20 +19,15 @@ class TabbedResults extends Component {
     }
 
     componentDidUpdate() {
-        const fromHoursString = moment(this.props.fromHours).format(T_FORMAT);
-        const fromDateString = moment(this.props.fromDate).format(D_FORMAT);
-        const toHoursString = moment(this.props.toHours).format(T_FORMAT);
-        const toDateString = moment(this.props.toDate).format(D_FORMAT);
+        const fromHoursString = this.props.fromHours ? moment(this.props.fromHours).format(T_FORMAT) : null;
+        const fromDateString = this.props.fromDate ? moment(this.props.fromDate).format(D_FORMAT) : null;
+        const toHoursString = this.props.toHours ? moment(this.props.toHours).format(T_FORMAT) : null;
+        const toDateString = this.props.toDate ? moment(this.props.toDate).format(D_FORMAT) : null;
 
         const propFromDateUTC = moment(`${fromDateString} ${fromHoursString}`).utc().format(D_FORMAT);
         const propToDateUTC = moment(`${toDateString} ${toHoursString}`).utc().format(D_FORMAT);
         const propFromHoursUTC = moment(`${fromDateString} ${fromHoursString}`).utc().format(T_FORMAT);
         const propToHoursUTC = moment(`${toDateString} ${toHoursString}`).utc().format(T_FORMAT);
-
-        // console.log("FULL TO UTC FROM DATE ==> ",moment(`${fromDateString} ${fromHoursString}`).utc().format(D_FORMAT));
-        // console.log("FULL TO UTC FROM TIME ==> ",moment(`${fromDateString} ${fromHoursString}`).utc().format(T_FORMAT));
-        // console.log("FULL TO UTC TO DATE ==> ",moment(`${toDateString} ${toHoursString}`).utc().format(D_FORMAT));
-        // console.log("FULL TO UTC TO TIME ==> ",moment(`${toDateString} ${toHoursString}`).utc().format(T_FORMAT));
 
         if (
             this.state.selectedBoxes !== this.props.selectedBoxes ||
@@ -41,7 +36,6 @@ class TabbedResults extends Component {
             this.state.fromHours !== propFromHoursUTC ||
             this.state.toHours !== propToHoursUTC
         ) {
-
             const fromDate = propFromDateUTC;
             const toDate = propToDateUTC;
             const fromHours = propFromHoursUTC;
@@ -51,12 +45,10 @@ class TabbedResults extends Component {
             this.setState({toDate});
             this.setState({fromHours});
             this.setState({toHours});
-
         }
     }
 
     render() {
-        // const hostname = "localhost:8080"; // ma ti pare?
         return (
             <Tabs>
                 {
