@@ -7,7 +7,8 @@ import {
 } from '../commons/Helpers';
 import RaisedButton from "material-ui/RaisedButton";
 import moment from "moment";
-import {D_FORMAT, T_FORMAT} from "../commons/Constants"
+import {D_FORMAT, T_FORMAT} from "../commons/Constants";
+import FileSaver from "file-saver";
 
 import 'react-table/react-table.css';
 
@@ -45,6 +46,11 @@ class TabResult extends Component {
         }
     }
 
+
+    /*
+        handle download cvs button click
+        FileSaver.js is used to be able to save large blob file on the client side
+     */
     handleClick() {
         const {csv, boxName, fromDateLocal, toDateLocal, fromHoursLocal, toHoursLocal} = this.props;
         if (!csv) return;
@@ -54,15 +60,18 @@ class TabResult extends Component {
 
         filename = `exportBox_${boxName}_from_${fromDateLocal}_at_${fromHoursLocal}_to_${toDateLocal}_at_${toHoursLocal}.csv`;
 
-        if (!csvText.match(/^data:text\/csv/i)) {
-            csvText = 'data:text/csv;charset=utf-8,' + csvText;
-        }
-        data = encodeURI(csvText);
-
-        link = document.createElement('a');
-        link.setAttribute('href', data);
-        link.setAttribute('download', filename);
-        link.click();
+        // if (!csvText.match(/^data:text\/csv/i)) {
+        //     csvText = 'data:text/csv;charset=utf-8,' + csvText;
+        // }
+        // data = encodeURI(csvText);
+        data = csvText;
+        //
+        // link = document.createElement('a');
+        // link.setAttribute('href', data);
+        // link.setAttribute('download', filename);
+        // link.click();
+        var blob = new Blob([data], {type: "text/csv;charset=utf-8"});
+        FileSaver.saveAs(blob, filename);
     }
 
     render() {

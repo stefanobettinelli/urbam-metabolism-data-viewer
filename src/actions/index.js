@@ -20,6 +20,7 @@ export const fetchFilteredObservationSuccess = (csv, boxName) => {
     }
 };
 
+//helper func. that fetches the data and if no errors occurs performs the dispatch of the POJO to the central store
 export const fetchFilteredObservation = (url, boxName) => {
     return (dispatch) => {
         return fetch(url)
