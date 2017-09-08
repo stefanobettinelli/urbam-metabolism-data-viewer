@@ -4,15 +4,15 @@
 
 import {connect} from 'react-redux';
 import TabResult from '../components/TabResult';
-import {fetchFilteredObservation} from '../actions';
+import {fetchBoxData} from '../actions';
 
 /*
     mapping the dispatch function to props so that the TabResult component
-    can use it to dispatch the fetchFilteredObservation action to the store
+    can use it to dispatch the fetchBoxData action to the store
 */
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCSVData: (url, boxName) => dispatch(fetchFilteredObservation(url, boxName))
+        fetchCSVData: (url, boxName) => dispatch(fetchBoxData(url, boxName))
     };
 };
 

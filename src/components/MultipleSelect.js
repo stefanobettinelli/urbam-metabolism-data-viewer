@@ -47,7 +47,7 @@ export default class MultipleSelect extends Component {
 
     render() {
         const {values} = this.state;
-        let selected = this.props.selectedBoxes.map(boxObj => boxObj.boxName );
+        let selected = this.props.selectedBoxes.items.map(boxObj => boxObj.boxName );
         return (
             <SelectField
                 multiple={true}

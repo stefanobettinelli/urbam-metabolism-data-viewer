@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import {Tab, Tabs} from "material-ui/Tabs";
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 import moment from "moment";
 import TabResultContainer from "../containers/TabResultContainer";
 import {D_FORMAT, T_FORMAT} from "../commons/Constants";
-import {REST_API_HOSTNAME} from "../commons/Constants"
+import {REST_API_HOSTNAME} from "../commons/Constants";
+import {CircularProgress} from "material-ui";
+import {white} from 'material-ui/styles/colors';
 
 class TabbedResults extends Component {
     constructor(props) {
@@ -49,16 +50,19 @@ class TabbedResults extends Component {
     }
 
     render() {
+        if(!this.state.selectedBoxes.items) {
+            return null;
+        }
         return (
             <Tabs>
                 {
-                    this.state.selectedBoxes.map(
+                    this.state.selectedBoxes.items.map(
                         (box) => {
                             const {fromDate, fromHours, toDate, toHours} = this.state;
                             let url =
                                 `http://${REST_API_HOSTNAME}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
                             return (
-                                <Tab key={String(box.boxName)} label={box.boxName}>
+                                <Tab key={String(box.boxName)}  icon={<CircularProgress color={white}/>} label={box.boxName}>
                                     <TabResultContainer
                                         key={String(box.boxName)} label={box.boxName} url={url} boxName={box.boxName} csv={box.csv}
                                         fromDate={this.state.fromDate}
