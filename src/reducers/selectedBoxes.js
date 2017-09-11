@@ -3,7 +3,7 @@ import {BOX_SELECTED, RECEIVE_BOX_DATA, CLEAR_SELECTED_BOX_LIST, REQUEST_BOX_DAT
 const selectedBoxes = (state = {isFetching: false, items: []}, action) => {
     switch (action.type) {
         case CLEAR_SELECTED_BOX_LIST:
-            return [];
+            return {isFetching: false, items: []};
         case BOX_SELECTED:
             const remainingBoxNameList = state.items.filter(boxObj => (action.boxNameList.indexOf(boxObj.boxName) >= 0)).map(boxObj => boxObj.boxName);
             const remainingState = state.items.filter(boxObj => (action.boxNameList.indexOf(boxObj.boxName) >= 0));
