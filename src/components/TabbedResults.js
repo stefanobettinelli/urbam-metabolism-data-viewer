@@ -63,7 +63,7 @@ class TabbedResults extends Component {
                             let url =
                                 `http://${REST_API_HOSTNAME}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
                             return (
-                                <Tab key={String(box.boxName)}  icon={isFetching ? <CircularProgress color={white}/> : null} label={box.boxName}>
+                                <Tab key={String(box.boxName)}  icon={box.isFetching ? <CircularProgress color={white}/> : null} label={box.boxName}>
                                     <TabResultContainer
                                         key={String(box.boxName)} label={box.boxName} url={url} boxName={box.boxName} csv={box.csv}
                                         fromDate={this.state.fromDate}
