@@ -26,8 +26,7 @@ export default class MultipleSelect extends Component {
     }
 
     handleChange (event, index, selected) {
-        const {updatedSelectedBoxes} = this.props;
-        updatedSelectedBoxes(selected);
+        this.props.updateSelectedBoxes(selected);
         this.setState({selected});
     }
 

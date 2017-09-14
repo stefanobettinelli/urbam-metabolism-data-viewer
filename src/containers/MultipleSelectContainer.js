@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url) => dispatch(fetchBoxList(url)),
-        updatedSelectedBoxes: (boxNameList) => dispatch(boxSelected(boxNameList))
+        updateSelectedBoxes: (boxNameList) => dispatch(boxSelected(boxNameList))
     };
 };
 

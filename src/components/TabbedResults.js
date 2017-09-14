@@ -11,7 +11,7 @@ class TabbedResults extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedBoxes: [],
+            selectedBoxes: {items: []},
             fromDate: null,
             fromHours: null,
             toDate: null,
@@ -30,8 +30,17 @@ class TabbedResults extends Component {
         const propFromHoursUTC = moment(`${fromDateString} ${fromHoursString}`).utc().format(T_FORMAT);
         const propToHoursUTC = moment(`${toDateString} ${toHoursString}`).utc().format(T_FORMAT);
 
+        if (this.state.selectedBoxes !== this.props.selectedBoxes) {
+            //debugger;
+            this.setState({selectedBoxes: this.props.selectedBoxes});
+        }
+
+        // debugger;
+        // if (this.state.selectedBoxes.items.map(box => box.boxName).sort().join() !== this.props.selectedBoxes.items.map(box => box.boxName).sort().join()) {
+        //     this.setState({selectedBoxes: this.props.selectedBoxes});
+        // }
+
         if (
-            this.state.selectedBoxes !== this.props.selectedBoxes ||
             moment(this.state.fromDate).format(D_FORMAT) !== propFromDateUTC ||
             moment(this.state.toDate).format(D_FORMAT) !== propToDateUTC ||
             this.state.fromHours !== propFromHoursUTC ||
@@ -41,19 +50,19 @@ class TabbedResults extends Component {
             const toDate = propToDateUTC;
             const fromHours = propFromHoursUTC;
             const toHours = propToHoursUTC;
-            this.setState({selectedBoxes: this.props.selectedBoxes});
             this.setState({fromDate});
             this.setState({toDate});
             this.setState({fromHours});
             this.setState({toHours});
         }
+
+        console.log(this.props.selectedBoxes.itemsToRender);
     }
 
     render() {
         if(!this.state.selectedBoxes.items) {
             return null;
         }
-        const {isFetching} = this.props;
         return (
             <Tabs>
                 {
