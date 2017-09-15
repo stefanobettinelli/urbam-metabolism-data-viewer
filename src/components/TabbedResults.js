@@ -15,29 +15,37 @@ class TabbedResults extends Component {
             fromDate: null,
             fromHours: null,
             toDate: null,
-            toHours: null
+            toHours: null,
+            fetchNewDataFor: "ALL" // this can be ALL, NONE or a precise boxname when a single box is added
         };
     }
 
-    componentDidUpdate() {
-        const fromHoursString = this.props.fromHours ? moment(this.props.fromHours).format(T_FORMAT) : null;
-        const fromDateString = this.props.fromDate ? moment(this.props.fromDate).format(D_FORMAT) : null;
-        const toHoursString = this.props.toHours ? moment(this.props.toHours).format(T_FORMAT) : null;
-        const toDateString = this.props.toDate ? moment(this.props.toDate).format(D_FORMAT) : null;
+    // componentDidUpdate
+    componentWillReceiveProps(nextProps) {
+        const fromHoursString = nextProps.fromHours ? moment(nextProps.fromHours).format(T_FORMAT) : null;
+        const fromDateString = nextProps.fromDate ? moment(nextProps.fromDate).format(D_FORMAT) : null;
+        const toHoursString = nextProps.toHours ? moment(nextProps.toHours).format(T_FORMAT) : null;
+        const toDateString = nextProps.toDate ? moment(nextProps.toDate).format(D_FORMAT) : null;
 
         const propFromDateUTC = moment(`${fromDateString} ${fromHoursString}`).utc().format(D_FORMAT);
         const propToDateUTC = moment(`${toDateString} ${toHoursString}`).utc().format(D_FORMAT);
         const propFromHoursUTC = moment(`${fromDateString} ${fromHoursString}`).utc().format(T_FORMAT);
         const propToHoursUTC = moment(`${toDateString} ${toHoursString}`).utc().format(T_FORMAT);
 
-        if (this.state.selectedBoxes !== this.props.selectedBoxes) {
-            //debugger;
-            this.setState({selectedBoxes: this.props.selectedBoxes});
+        if(nextProps.selectedBoxes.items.length < this.state.selectedBoxes.items.length) {
+            this.setState({selectedBoxes: nextProps.selectedBoxes});
+            this.setState({fetchNewDataFor: "NONE"});
+            return;
+        }
+
+        if (this.state.selectedBoxes !== nextProps.selectedBoxes) {
+            this.setState({selectedBoxes: nextProps.selectedBoxes});
+            this.setState({fetchNewDataFor: nextProps.selectedBoxes.newItemToRender});
         }
 
         // debugger;
-        // if (this.state.selectedBoxes.items.map(box => box.boxName).sort().join() !== this.props.selectedBoxes.items.map(box => box.boxName).sort().join()) {
-        //     this.setState({selectedBoxes: this.props.selectedBoxes});
+        // if (this.state.selectedBoxes.items.map(box => box.boxName).sort().join() !== nextProps.selectedBoxes.items.map(box => box.boxName).sort().join()) {
+        //     this.setState({selectedBoxes: nextProps.selectedBoxes});
         // }
 
         if (
@@ -54,10 +62,12 @@ class TabbedResults extends Component {
             this.setState({toDate});
             this.setState({fromHours});
             this.setState({toHours});
+            this.setState({fetchNewDataFor: "ALL"});
         }
 
-        console.log(this.props.selectedBoxes.itemsToRender);
     }
+
+
 
     render() {
         if(!this.state.selectedBoxes.items) {
@@ -79,10 +89,11 @@ class TabbedResults extends Component {
                                         toDate={this.state.toDate}
                                         fromHours={this.state.fromHours}
                                         toHours={this.state.toHours}
-                                        fromDateLocal={moment(this.props.fromDate).format(D_FORMAT)}
-                                        toDateLocal={moment(this.props.toDate).format(D_FORMAT)}
-                                        fromHoursLocal={moment(this.props.fromHours).format(T_FORMAT)}
-                                        toHoursLocal={moment(this.props.toHours).format(T_FORMAT)}
+                                        fromDateLocal={moment(this.state.fromDate).format(D_FORMAT)}
+                                        toDateLocal={moment(this.state.toDate).format(D_FORMAT)}
+                                        fromHoursLocal={moment(this.state.fromHours).format(T_FORMAT)}
+                                        toHoursLocal={moment(this.state.toHours).format(T_FORMAT)}
+                                        fetchNewDataFor={this.state.fetchNewDataFor}
                                     />
                                 </Tab>
                             );

@@ -12,10 +12,10 @@ const selectedBoxes = (state = {items: []}, action) => {
                 let addedBoxName = action.boxNameList.filter(boxName => currentBoxNameList.indexOf(boxName) < 0)[0]; // it should be one element only
                 let newItems = state.items.map(box => Object.assign({}, box));
                 newItems.push({isFetching: false, boxName: String(addedBoxName), csv: null});
-                return {items: newItems, itemsToRender: [addedBoxName]};
+                return {items: newItems, newItemToRender: addedBoxName};
             } else {
                 // filter the remaining
-                return { items: state.items.filter(box => (action.boxNameList.indexOf(box.boxName) >= 0)), itemsToRender: []};
+                return { items: state.items.filter(box => (action.boxNameList.indexOf(box.boxName) >= 0)), newItemToRender: null};
             }
             // const remainingBoxNameList = state.items.filter(boxObj => (action.boxNameList.indexOf(boxObj.boxName) >= 0)).map(boxObj => boxObj.boxName);
             // const remainingState = state.items.filter(boxObj => (action.boxNameList.indexOf(boxObj.boxName) >= 0));
@@ -31,11 +31,14 @@ const selectedBoxes = (state = {items: []}, action) => {
             // reducers must always return new allocated state starting from the previous
             const newItems = state.items.map(item => {
                 let newItem = {};
-                newItem.isFetching = item.boxName === action.boxName;
+                // if it's already fetching do nothing and maintains its' value, else check if the box name match and assign it to true
+                newItem.isFetching = !item.isFetching ? item.boxName === action.boxName : item.isFetching;
+                //newItem.isFetching = true;
                 newItem.boxName = item.boxName;
                 newItem.csv = item.csv;
                 return newItem;
             });
+            //console.log("REQUEST_BOX_DATA new data: ", {items: [...newItems]});
             return {items: [...newItems]};
         }
         case RECEIVE_BOX_DATA: {

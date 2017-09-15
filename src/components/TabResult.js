@@ -30,15 +30,16 @@ class TabResult extends Component {
     }
 
     fetchData() {
-        const {fromDate, toDate, fromHours, toHours} = this.props;
-        if (!moment(`${fromDate} ${fromHours}`, `${D_FORMAT} ${T_FORMAT}`, true).isValid() || !moment(`${toDate} ${toHours}`, `${D_FORMAT} ${T_FORMAT}`, true).isValid()) {
-            return;
-        }
+        const {fromDate, toDate, fromHours, toHours, fetchNewDataFor, url, boxName} = this.props;
+        if (fetchNewDataFor === boxName || fetchNewDataFor === "ALL") {
+            if (!moment(`${fromDate} ${fromHours}`, `${D_FORMAT} ${T_FORMAT}`, true).isValid() || !moment(`${toDate} ${toHours}`, `${D_FORMAT} ${T_FORMAT}`, true).isValid()) {
+                return;
+            }
 
-        const {url, boxName} = this.props;
-        this.setState({url});
-        console.log("URL: ", url);
-        this.props.fetchCSVData(url, boxName);
+            this.setState({url});
+            this.props.fetchCSVData(url, boxName);
+            console.log("Fetching data for ", boxName);
+        }
     }
 
     componentDidUpdate() {
