@@ -28,6 +28,7 @@ class TabbedResults extends Component {
         const toDateString = nextProps.toDate ? moment(nextProps.toDate).format(D_FORMAT) : null;
 
         const propFromDateUTC = moment(`${fromDateString} ${fromHoursString}`).utc().format(D_FORMAT);
+
         const propToDateUTC = moment(`${toDateString} ${toHoursString}`).utc().format(D_FORMAT);
         const propFromHoursUTC = moment(`${fromDateString} ${fromHoursString}`).utc().format(T_FORMAT);
         const propToHoursUTC = moment(`${toDateString} ${toHoursString}`).utc().format(T_FORMAT);
@@ -43,16 +44,20 @@ class TabbedResults extends Component {
             this.setState({fetchNewDataFor: nextProps.selectedBoxes.newItemToRender});
         }
 
-        // debugger;
-        // if (this.state.selectedBoxes.items.map(box => box.boxName).sort().join() !== nextProps.selectedBoxes.items.map(box => box.boxName).sort().join()) {
-        //     this.setState({selectedBoxes: nextProps.selectedBoxes});
-        // }
+        if (
+            !moment(propFromDateUTC).isValid() ||
+            !moment(propToDateUTC).isValid() ||
+            !moment(propFromHoursUTC, T_FORMAT).isValid() ||
+            !moment(propToHoursUTC, T_FORMAT).isValid()
+        ) {
+            return;
+        }
 
         if (
-            moment(this.state.fromDate).format(D_FORMAT) !== propFromDateUTC ||
-            moment(this.state.toDate).format(D_FORMAT) !== propToDateUTC ||
-            this.state.fromHours !== propFromHoursUTC ||
-            this.state.toHours !== propToHoursUTC
+            moment(this.state.fromDate, D_FORMAT).format(D_FORMAT) !== propFromDateUTC ||
+            moment(this.state.toDate, D_FORMAT).format(D_FORMAT) !== propToDateUTC ||
+            moment(this.state.fromHours, T_FORMAT).format(T_FORMAT) !== propFromHoursUTC ||
+            moment(this.state.toHours, T_FORMAT).format(T_FORMAT) !== propToHoursUTC
         ) {
             const fromDate = propFromDateUTC;
             const toDate = propToDateUTC;
@@ -64,7 +69,6 @@ class TabbedResults extends Component {
             this.setState({toHours});
             this.setState({fetchNewDataFor: "ALL"});
         }
-
     }
 
 
@@ -78,6 +82,7 @@ class TabbedResults extends Component {
                 {
                     this.state.selectedBoxes.items.map(
                         (box) => {
+                            // console.log("Rendering box ", box.boxName);
                             const {fromDate, fromHours, toDate, toHours} = this.state;
                             let url =
                                 `http://${REST_API_HOSTNAME}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;

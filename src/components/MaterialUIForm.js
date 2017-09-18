@@ -25,6 +25,7 @@ const MaterialUiForm = props => {
                     component={DatePicker}
                     format={null}
                     hintText="From Date?"
+                    // onChange={() => store.dispatch()}
                 />
             </div>
             <div>

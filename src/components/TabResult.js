@@ -32,13 +32,14 @@ class TabResult extends Component {
     fetchData() {
         const {fromDate, toDate, fromHours, toHours, fetchNewDataFor, url, boxName} = this.props;
         if (fetchNewDataFor === boxName || fetchNewDataFor === "ALL") {
+            console.log("fetchNewDataFor ", fetchNewDataFor);
             if (!moment(`${fromDate} ${fromHours}`, `${D_FORMAT} ${T_FORMAT}`, true).isValid() || !moment(`${toDate} ${toHours}`, `${D_FORMAT} ${T_FORMAT}`, true).isValid()) {
                 return;
             }
 
             this.setState({url});
             this.props.fetchCSVData(url, boxName);
-            console.log("Fetching data for ", boxName);
+            // console.log("Fetching data for ", boxName);
         }
     }
 
