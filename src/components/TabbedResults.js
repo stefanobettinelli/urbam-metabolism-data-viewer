@@ -16,6 +16,7 @@ class TabbedResults extends Component {
       fromHours: null,
       toDate: null,
       toHours: null,
+      timeZone: 'UTC',
       fetchNewDataFor: 'ALL' // this can be ALL, NONE or a precise boxname when a single box is added
     };
   }
@@ -92,13 +93,21 @@ class TabbedResults extends Component {
       this.setState({ toHours });
       this.setState({ fetchNewDataFor: 'ALL' });
     }
+
+    if (this.state.timeZone !== nextProps.timeZone) {
+      this.setState({ 
+        fetchNewDataFor: 'ALL',
+        timeZone: nextProps.timeZone 
+      });
+    }    
   }
 
   render() {
     if (!this.state.selectedBoxes.items) {
       return null;
     }
-    return (      
+    const { timeZone } = this.state;    
+    return (
       <Tabs>
         {this.state.selectedBoxes.items.map(box => {
           const { fromDate, fromHours, toDate, toHours } = this.state;
@@ -108,9 +117,9 @@ class TabbedResults extends Component {
             `&datafrom=${fromDate}`,
             `&h_from=${fromHours}`,
             `&datato=${toDate}`,
-            `&h_to=${toHours}`
+            `&h_to=${toHours}`,
+            `&time_zone=${timeZone}`
           ].join('');
-          ;
           return (
             <Tab
               key={String(box.boxName)}
