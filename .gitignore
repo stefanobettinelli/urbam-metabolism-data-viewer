@@ -21,3 +21,7 @@ yarn-error.log*
 
 # Windows shortcuts
 *.lnk
+
+#vs code conf. files
+
+/.vscode
