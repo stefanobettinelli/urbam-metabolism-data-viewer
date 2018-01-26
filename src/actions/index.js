@@ -76,7 +76,6 @@ export const clearSelectedBoxList = () => {
 
 export const TIME_ZONE_CHANGED = 'TIME_ZONE_CHANGED';
 export const timeZoneChanged = (timeZone) => {
-    console.log(timeZone);
     return {
       type: TIME_ZONE_CHANGED,
       timeZone

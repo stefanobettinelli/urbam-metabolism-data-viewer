@@ -82,7 +82,6 @@ class TabbedResults extends Component {
                 {
                     this.state.selectedBoxes.items.map(
                         (box) => {
-                            // console.log("Rendering box ", box.boxName);
                             const {fromDate, fromHours, toDate, toHours} = this.state;
                             let url =
                                 `http://${REST_API_HOSTNAME}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
