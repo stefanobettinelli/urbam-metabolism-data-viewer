@@ -95,15 +95,22 @@ class TabbedResults extends Component {
   }
 
   render() {
-    console.log('dio porco');
     if (!this.state.selectedBoxes.items) {
       return null;
     }
-    return (
+    return (      
       <Tabs>
         {this.state.selectedBoxes.items.map(box => {
           const { fromDate, fromHours, toDate, toHours } = this.state;
-          let url = `http://${REST_API_HOSTNAME}/get_all_obs_from_date_to_date_for_obs_sys?obsys=${box.boxName.toUpperCase()}&datafrom=${fromDate}&h_from=${fromHours}&datato=${toDate}&h_to=${toHours}`;
+          let url = [
+            `http://${REST_API_HOSTNAME}/get_all_obs_from_date_to_date_for_obs_sys?`,
+            `obsys=${box.boxName.toUpperCase()}`,
+            `&datafrom=${fromDate}`,
+            `&h_from=${fromHours}`,
+            `&datato=${toDate}`,
+            `&h_to=${toHours}`
+          ].join('');
+          ;
           return (
             <Tab
               key={String(box.boxName)}
