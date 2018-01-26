@@ -79,7 +79,7 @@ const MaterialUiForm = props => {
             style={styles.radioButton}
           />
           <RadioButton
-            value="eu-rome"
+            value="Europe/Rome"
             label="EU-ROME"
             style={styles.radioButton}
           />
