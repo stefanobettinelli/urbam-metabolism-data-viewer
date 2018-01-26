@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import MultipleSelectContainer from '../containers/MultipleSelectContainer';
 import store from '../store';
-import { clearSelectedBoxList } from '../actions';
+import { clearSelectedBoxList, timeZoneChanged } from '../actions';
 
 const renderBoxList = props => {
   return <MultipleSelectContainer />;
@@ -62,7 +62,7 @@ const MaterialUiForm = props => {
         />
       </div>
       <div>
-        <RadioButtonGroup name="shipSpeed" defaultSelected="utc">          
+        <RadioButtonGroup onChange={(ev, val) => store.dispatch(timeZoneChanged(val.toUpperCase()))} name="shipSpeed" defaultSelected="utc">
           <RadioButton
             value="utc"
             label="UTC"
