@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
         fromDate: state.form.MaterialUiForm.values !== undefined ? state.form.MaterialUiForm.values.fromDate : null,
         toDate: state.form.MaterialUiForm.values !== undefined ? state.form.MaterialUiForm.values.toDate : null,
         fromHours: state.form.MaterialUiForm.values !== undefined ? state.form.MaterialUiForm.values.fromHours : null,
-        toHours: state.form.MaterialUiForm.values !== undefined ? state.form.MaterialUiForm.values.toHours : null
+        toHours: state.form.MaterialUiForm.values !== undefined ? state.form.MaterialUiForm.values.toHours : null,
+        timeZone: state.timeZone
     }
 };
 
