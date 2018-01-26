@@ -1,5 +1,4 @@
 export const FETCH_BOX_LIST_SUCCESS = 'FETCH_BOX_LIST_SUCCESS';
-
 export const fetchBoxListSuccess = (json) => {
     return {
         type: FETCH_BOX_LIST_SUCCESS,
@@ -72,5 +71,14 @@ export const CLEAR_SELECTED_BOX_LIST = 'CLEAR_SELECTED_BOX_LIST';
 export const clearSelectedBoxList = () => {
     return {
         type: CLEAR_SELECTED_BOX_LIST
+    };
+};
+
+export const TIME_ZONE_CHANGED = 'TIME_ZONE_CHANGED';
+export const timeZoneChanged = (timeZone) => {
+    console.log(timeZone);
+    return {
+      type: TIME_ZONE_CHANGED,
+      timeZone
     };
 };
